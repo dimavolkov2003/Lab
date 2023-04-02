@@ -10,6 +10,8 @@ namespace Player
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerEntity : MonoBehaviour
 {
+    [SerializeField] private Animator _animator;
+
     [Header("HorizontalMovement")]
     [SerializeField] private float _horizontalSpeed;
     [SerializeField] private Direction _direction;
@@ -33,7 +35,11 @@ public class PlayerEntity : MonoBehaviour
     private float _sizeModificator;
     private bool _isJumping;
     private float _startJumpVerticalPosition;
- 
+    private bool _isAttack;
+    private float _timer = 0.1f;
+
+    private Vector2 _movement;
+    private AnimationType _currentAnimationType;
 
     private void Start()
     {
@@ -44,13 +50,35 @@ public class PlayerEntity : MonoBehaviour
         _sizeModificator = sizeDifference / positionDifference;
         UpdateSize();
     }
+    
     private void Update()
     {
         if(_isJumping)
             UpdateJump();
+
+        UpdateAnimations();
+
+        if(_timer > 0) _timer -= Time.deltaTime;
+        if(_timer < 0) _timer = 0; 
+        if(_timer == 0)
+        {
+            _isAttack = false;
+            _timer = 0.1f;
+        }
     }
+
+
+    private void UpdateAnimations()
+    {
+        PlayAnimation(AnimationType.Idle, true);
+        PlayAnimation(AnimationType.Run, _movement.magnitude > 0);
+        PlayAnimation(AnimationType.Jump, _isJumping);
+        PlayAnimation(AnimationType.Attack, _isAttack);
+    }
+
     public void MoveHorizontally(float direction)
     {
+        _movement.x = direction;
         SetDirection(direction);
         Vector2 velocity = _rigidbody.velocity;
         velocity.x = direction * _horizontalSpeed;
@@ -62,6 +90,8 @@ public class PlayerEntity : MonoBehaviour
         {
             return;
         }
+
+        _movement.y = direction;
         Vector2 velocity = _rigidbody.velocity;
         velocity.y = direction * _verticalSpeed;
         _rigidbody.velocity = velocity;
@@ -120,6 +150,34 @@ public class PlayerEntity : MonoBehaviour
         _isJumping = false;
         _rigidbody.position = new Vector2(_rigidbody.position.x, _startJumpVerticalPosition);
         _rigidbody.gravityScale = 0;
+    }
+    public void Attack()
+    {
+        _isAttack = true;
+    }
+
+    private void PlayAnimation(AnimationType animationType, bool active)
+    {
+        if(!active)
+        {
+            if (_currentAnimationType == AnimationType.Idle || _currentAnimationType != animationType)
+                return;
+
+            _currentAnimationType = AnimationType.Idle; 
+            PlayAnimation(_currentAnimationType);
+            return;
+        }
+
+        if(_currentAnimationType >= animationType)
+            return;
+        
+        _currentAnimationType = animationType;
+        PlayAnimation(_currentAnimationType);
+    }
+
+    private void PlayAnimation(AnimationType animationType)
+    {
+        _animator.SetInteger(nameof(AnimationType), (int)animationType);
     }
  }
 }

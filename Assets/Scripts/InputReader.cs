@@ -15,6 +15,8 @@ public class InputReader : MonoBehaviour
         _verticalDirection = Input.GetAxisRaw("Vertical");
         if(Input.GetButtonDown("Jump"))
             _playerEntity.Jump();
+        if (Input.GetKey(KeyCode.Mouse0))
+            _playerEntity.Attack();
     }
     private void FixedUpdate() 
     {
