@@ -9,7 +9,7 @@ namespace Player
         Idle = 0,
         Run = 1,
         Jump = 2,
-        Attack = 3,
+        Attack = 3
     }
 
 }
