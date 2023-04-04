@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player.PlayAnimation
+namespace Core.Animation
 {
     [RequireComponent(typeof(Animator))]
     public class UnityAnimatorController : AnimatorController

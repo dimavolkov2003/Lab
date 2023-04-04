@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player.PlayAnimation
+namespace Core.Animation
 {
     public abstract class AnimatorController : MonoBehaviour
     {

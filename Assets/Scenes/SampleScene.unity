@@ -1010,8 +1010,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1095146669
-  m_SortingLayer: -1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300002, guid: 2d530dec9fa1e734aa2c75045650e771, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2929,7 +2929,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1095146669
   m_SortingLayer: -1
-  m_SortingOrder: 20
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300046, guid: ff840077c65f9a44da78bdccf4dbee29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4338,15 +4338,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1709530731}
-  _horizontalSpeed: 5
-  _direction: 0
-  _verticalSpeed: 3
-  _minSize: 1.35
-  _maxSize: 1.5
-  _maxVerticalPosition: -1.6
-  _minVerticalPosition: -2.25
-  _jumpForce: 800
-  _gravityScale: 5
+  _directionMovementData:
+    <HorizontalSpeed>k__BackingField: 6
+    <Direction>k__BackingField: 0
+    <VerticalSpeed>k__BackingField: 3
+    <MinSize>k__BackingField: 1.35
+    <MaxSize>k__BackingField: 1.5
+    <MaxVerticalPosition>k__BackingField: -1.6
+    <MinVerticalPosition>k__BackingField: -2.25
+  _jumpData:
+    JumpForce: 800
+    GravityScale: 5
   _cameras:
     _rightCamera: {fileID: 1612377548}
     _leftCamera: {fileID: 2129768613}
@@ -6675,7 +6677,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1930878271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971919cfb07454a4c961a209e832af83, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e2e8938d1761804195f35baa8a39c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _joystick: {fileID: 343475858}
